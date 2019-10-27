@@ -257,7 +257,7 @@ namespace CustomerService.Api
 
         private static string GetXmlCommentsPath()
         {
-            return System.AppDomain.CurrentDomain.BaseDirectory + @"bin\CustomerService.Api.xml";
+            return System.AppDomain.CurrentDomain.BaseDirectory + @"bin\SwaggerDemoApi.xml";
         }
     }
 }
