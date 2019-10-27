@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CustomerService.Api;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,9 @@ using System.Threading.Tasks;
 
 namespace CustomerService.Data.Repositories.Impl
 {
-    public class CustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
-        : ICustomerRepository
-    {
-        TestDbEntities _context = new TestDbEntities();
+        DbEntities _context = new DbEntities();
 
         public Customer GetCustomerBy(int id)
         {
@@ -28,5 +27,6 @@ namespace CustomerService.Data.Repositories.Impl
         }
 
         public void Dispose() => _context.Dispose();
+
     }
 }

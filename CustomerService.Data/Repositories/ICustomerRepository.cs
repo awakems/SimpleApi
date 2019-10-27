@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CustomerService.Api;
 
 namespace CustomerService.Data.Repositories
 {
-    interface ICustomerRepository
+    public interface ICustomerRepository
     {
+        Customer GetCustomerBy(int id);
+        Customer GetCustomerBy(string email);
+        Customer GetCustomerBy(int id, string email);
     }
 }
