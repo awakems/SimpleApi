@@ -19,7 +19,7 @@ namespace CustomerService.Api.Utils
                 cfg.CreateMap<Transaction, TransactionServiceModel>();
                 cfg.CreateMap<CustomerServiceModel, CustomerApiModel>();
                 cfg.CreateMap<TransactionServiceModel, TransactionApiModel>()
-                 .ForMember("TransactionDateTime", opt => opt.MapFrom(c => c.TransactionDateTime.ToString("dd/MM/yy hh:mm")))
+                 .ForMember("TransactionDateTime", opt => opt.MapFrom(c => c.TransactionDateTime.ToString("dd/MM/yy HH:mm")))
                  .ForMember("Amount", opt => opt.MapFrom(c => String.Format("{0:0.00}", c.Amount)));
 
             });
