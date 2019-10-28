@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CustomerService.Api.Models;
+using CustomerService.Api.Models.RequestModels;
 using CustomerService.Data.Services;
 using System;
 using System.Text.RegularExpressions;
@@ -16,6 +17,19 @@ namespace CustomerService.Api.Controllers
         {
             _customerService = customerService;
             _mapper = mapper;
+        }
+
+        public IHttpActionResult Post(CustomerRequestModel requestModel)
+        {
+            try
+            {
+                //Todo
+                return BadRequest("Not impl");
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
         }
 
         /// <summary>
