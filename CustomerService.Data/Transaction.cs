@@ -7,19 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CustomerService.Api
+namespace CustomerService.Data
 {
     using System;
     using System.Collections.Generic;
     
     public partial class Transaction
     {
-        public decimal ID { get; set; }
+        public long ID { get; set; }
         public System.DateTime TransactionDateTime { get; set; }
         public decimal Amount { get; set; }
         public string CurrencyCode { get; set; }
         public string Status { get; set; }
-        public decimal CustomerId { get; set; }
+        public long CustomerId { get; set; }
     
         public virtual Customer Customer { get; set; }
     }

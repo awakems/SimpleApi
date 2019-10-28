@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CustomerService.Api
+namespace CustomerService.Data
 {
     using System;
     using System.Collections.Generic;
@@ -20,7 +20,7 @@ namespace CustomerService.Api
             this.Transactions = new HashSet<Transaction>();
         }
     
-        public decimal ID { get; set; }
+        public long ID { get; set; }
         public string Name { get; set; }
         public string ContactEmail { get; set; }
         public Nullable<decimal> MobileNo { get; set; }

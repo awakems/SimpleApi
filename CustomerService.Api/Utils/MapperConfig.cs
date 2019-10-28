@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CustomerService.Api.Models;
 using CustomerService.Api.Models.RequestModels;
+using CustomerService.Data;
 using CustomerService.Data.Services.ServiceModels;
 using CustomerService.Data.Services.ServiceModels.ServiceRequestModels;
 using System;

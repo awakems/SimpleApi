@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CustomerService.Api
+namespace CustomerService.Data
 {
     using System;
     using System.Data.Entity;
@@ -26,7 +26,6 @@ namespace CustomerService.Api
         }
     
         public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
     }
 }

@@ -1,6 +1,4 @@
-﻿using CustomerService.Api;
-
-namespace CustomerService.Data.Repositories
+﻿namespace CustomerService.Data.Repositories
 {
     public interface ICustomerRepository
     {
