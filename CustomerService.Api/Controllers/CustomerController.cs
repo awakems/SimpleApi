@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CustomerService.Api.Filters;
 using CustomerService.Api.Models;
 using CustomerService.Api.Models.RequestModels;
 using CustomerService.Data.Services;
@@ -19,12 +20,14 @@ namespace CustomerService.Api.Controllers
             _mapper = mapper;
         }
 
-        public IHttpActionResult Post(CustomerRequestModel requestModel)
+        
+        [HttpPost]
+        [ValidateModel]
+        public IHttpActionResult Post([FromBody] CustomerRequestModel requestModel)
         {
             try
             {
-                //Todo
-                return BadRequest("Not impl");
+                return Ok("Vse OK");
             }
             catch (Exception e)
             {
@@ -60,23 +63,23 @@ namespace CustomerService.Api.Controllers
         /// </summary>
         /// <param name="email">Customer Email</param>
         /// <returns>returns Customer object with one last Transactions</returns>
-        [HttpGet]
-        public IHttpActionResult Get([FromUri]string email)
-        {
-            try
-            {
-                if (!ValidEmail(email)) return BadRequest("Invalid Email");
-                var serviceModel = _customerService.GetCustomerBy(email);
-                if (serviceModel == null) return BadRequest("No inquiry criteria");
-                var result = _mapper.Map<CustomerApiModel>(serviceModel);
-                return Ok<CustomerApiModel>(result);
-            }
-            catch (Exception e)
-            {
-                return InternalServerError(e);
-            }
+        //[HttpGet]
+        //public IHttpActionResult Get([FromUri]string email)
+        //{
+        //    try
+        //    {
+        //        if (!ValidEmail(email)) return BadRequest("Invalid Email");
+        //        var serviceModel = _customerService.GetCustomerBy(email);
+        //        if (serviceModel == null) return BadRequest("No inquiry criteria");
+        //        var result = _mapper.Map<CustomerApiModel>(serviceModel);
+        //        return Ok<CustomerApiModel>(result);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return InternalServerError(e);
+        //    }
 
-        }
+        //}
 
         /// <summary>
         /// Get customer by email and customerID from database
@@ -84,31 +87,25 @@ namespace CustomerService.Api.Controllers
         /// <param name="customerID"></param>
         /// <param name="email"></param>
         /// <returns>returns Customer object with 5 last Transactions</returns>
-        [HttpGet]
-        public IHttpActionResult Get([FromUri] int customerID, string email)
-        {
-            try
-            {
-                if (customerID <= 0) return BadRequest("Invalid Customer ID ");
-                if (!ValidEmail(email)) return BadRequest("Invalid Email");
-                var serviceModel = _customerService.GetCustomerBy(customerID, email);
-                if (serviceModel == null) return BadRequest("No inquiry criteria");
-                var result = _mapper.Map<CustomerApiModel>(serviceModel);
-                return Ok<CustomerApiModel>(result);
-            }
-            catch (Exception e)
-            {
-                return InternalServerError(e);
-            }
+        //[HttpGet]
+        //public IHttpActionResult Get([FromUri] int customerID, string email)
+        //{
+        //    try
+        //    {
+        //        if (customerID <= 0) return BadRequest("Invalid Customer ID ");
+        //        if (!ValidEmail(email)) return BadRequest("Invalid Email");
+        //        var serviceModel = _customerService.GetCustomerBy(customerID, email);
+        //        if (serviceModel == null) return BadRequest("No inquiry criteria");
+        //        var result = _mapper.Map<CustomerApiModel>(serviceModel);
+        //        return Ok<CustomerApiModel>(result);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return InternalServerError(e);
+        //    }
 
-        }
+        //}
 
-        private bool ValidEmail(string emailString)
-        {
-            if (emailString == null) return false;
-            if (emailString.Length > 25) return false;
-            bool isEmail = Regex.IsMatch(emailString, @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z", RegexOptions.IgnoreCase);
-            return isEmail;
-        }
+        
     }
 }

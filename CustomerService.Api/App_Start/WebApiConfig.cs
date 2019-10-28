@@ -1,4 +1,5 @@
 ﻿using CustomerService.Api.App_Start;
+using CustomerService.Api.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace CustomerService.Api
             // Web API configuration and services
             StructuremapWebApi.Start();
             // Web API configuration and services
+            config.Filters.Add(new ValidateModelAttribute());
             config.Formatters.Clear();
             config.Formatters.Add(new System.Net.Http.Formatting.JsonMediaTypeFormatter());
             // Web API routes
