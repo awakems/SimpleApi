@@ -22,6 +22,14 @@ namespace CustomerService.Api.Controllers
         }
 
         
+        /// <summary>
+        /// Depends on request params returns Customer with last Transactions.
+        /// 1) by id - no transactions
+        /// 2) by email - one last transaction
+        /// 3) both - five last transactions
+        /// </summary>
+        /// <param name="requestModel">request model</param>
+        /// <returns>Customer and last transactions</returns>
         [HttpPost]
         [ValidateModel]
         public IHttpActionResult Post([FromBody] CustomerRequestModel requestModel)
@@ -39,78 +47,5 @@ namespace CustomerService.Api.Controllers
                 return InternalServerError(e);
             }
         }
-
-        /// <summary>
-        /// Get customer by id from database
-        /// </summary>
-        /// <param name="customerID"> Customer id</param>
-        /// <returns>Returns Customer object without Transactions</returns>
-        [HttpGet]
-        public IHttpActionResult Get([FromUri]int customerID)
-        {
-            try
-            {
-                if (customerID <= 0) return BadRequest("Invalid Customer ID ");
-                var serviceModel = _customerService.GetCustomerBy(customerID);
-                if (serviceModel == null) return BadRequest("No inquiry criteria");
-                var result = _mapper.Map<CustomerApiModel>(serviceModel);
-                return Ok<CustomerApiModel>(result);
-            }
-            catch (Exception e)
-            {
-                return InternalServerError(e);
-            }
-
-        }
-
-        /// <summary>
-        /// Get customer by email from database
-        /// </summary>
-        /// <param name="email">Customer Email</param>
-        /// <returns>returns Customer object with one last Transactions</returns>
-        //[HttpGet]
-        //public IHttpActionResult Get([FromUri]string email)
-        //{
-        //    try
-        //    {
-        //        if (!ValidEmail(email)) return BadRequest("Invalid Email");
-        //        var serviceModel = _customerService.GetCustomerBy(email);
-        //        if (serviceModel == null) return BadRequest("No inquiry criteria");
-        //        var result = _mapper.Map<CustomerApiModel>(serviceModel);
-        //        return Ok<CustomerApiModel>(result);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return InternalServerError(e);
-        //    }
-
-        //}
-
-        /// <summary>
-        /// Get customer by email and customerID from database
-        /// </summary>
-        /// <param name="customerID"></param>
-        /// <param name="email"></param>
-        /// <returns>returns Customer object with 5 last Transactions</returns>
-        //[HttpGet]
-        //public IHttpActionResult Get([FromUri] int customerID, string email)
-        //{
-        //    try
-        //    {
-        //        if (customerID <= 0) return BadRequest("Invalid Customer ID ");
-        //        if (!ValidEmail(email)) return BadRequest("Invalid Email");
-        //        var serviceModel = _customerService.GetCustomerBy(customerID, email);
-        //        if (serviceModel == null) return BadRequest("No inquiry criteria");
-        //        var result = _mapper.Map<CustomerApiModel>(serviceModel);
-        //        return Ok<CustomerApiModel>(result);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return InternalServerError(e);
-        //    }
-
-        //}
-
-        
     }
 }

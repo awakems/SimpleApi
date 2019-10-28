@@ -7,9 +7,18 @@ using System.Web;
 
 namespace CustomerService.Api.Models.RequestModels
 {
+    /// <summary>
+    /// Request model used to get Customer
+    /// </summary>
     public class CustomerRequestModel : IValidatableObject
     {
+        /// <summary>
+        /// Customer Id from db
+        /// </summary>
         public int? customerID { get; set; }
+        /// <summary>
+        /// Customer Email
+        /// </summary>
         public string email { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
