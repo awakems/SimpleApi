@@ -82,6 +82,7 @@
     <Compile Include="Services\ICustomerService.cs" />
     <Compile Include="Services\Impl\CustomerService.cs" />
     <Compile Include="Services\ServiceModels\CustomerServiceModel.cs" />
+    <Compile Include="Services\ServiceModels\ServiceRequestModels\CustomerServiceRequestModel.cs" />
     <Compile Include="Services\ServiceModels\TransactionServiceModel.cs" />
     <Compile Include="sysdiagram.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
