@@ -3,6 +3,7 @@ using CustomerService.Api.Filters;
 using CustomerService.Api.Models;
 using CustomerService.Api.Models.RequestModels;
 using CustomerService.Data.Services;
+using CustomerService.Data.Services.ServiceModels.ServiceRequestModels;
 using System;
 using System.Text.RegularExpressions;
 using System.Web.Http;
@@ -27,7 +28,11 @@ namespace CustomerService.Api.Controllers
         {
             try
             {
-                return Ok("Vse OK");
+                var requestService = _mapper.Map<CustomerServiceRequestModel>(requestModel);
+                var serviceModel = _customerService.GetCustomer(requestService);
+                if (serviceModel == null) return BadRequest("No inquiry criteria");
+                var result = _mapper.Map<CustomerApiModel>(serviceModel);
+                return Ok<CustomerApiModel>(result);
             }
             catch (Exception e)
             {
