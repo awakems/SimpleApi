@@ -42,14 +42,9 @@ namespace CustomerService.Data.Services.Impl
             {
                 var customer = _customerRepository.GetCustomerBy((int)id);
                 if (customer == null) return null;
-
-                return new CustomerServiceModel
-                {
-                    ID = customer.ID,
-                    ContactEmail = customer.ContactEmail,
-                    Name = customer.Name,
-                    MobileNo = customer.MobileNo
-                };
+                customer.Transactions = customer.Transactions.Take(0).ToList();
+                var result = _mapper.Map<CustomerServiceModel>(customer);
+                return result;
             }
             //case with email present
             else
@@ -60,38 +55,6 @@ namespace CustomerService.Data.Services.Impl
                 var result = _mapper.Map<CustomerServiceModel>(customer);
                 return result;
             }
-        }
-
-        public CustomerServiceModel GetCustomerBy(int id)
-        {
-            var customer = _customerRepository.GetCustomerBy(id);
-            if (customer == null) return null;
-
-            return new CustomerServiceModel
-            {
-                ID = customer.ID,
-                ContactEmail = customer.ContactEmail,
-                Name = customer.Name,
-                MobileNo = customer.MobileNo
-            };
-        }
-
-        public CustomerServiceModel GetCustomerBy(string email)
-        {
-            var customer = _customerRepository.GetCustomerBy(email);
-            if (customer == null) return null;
-            customer.Transactions = customer.Transactions.OrderByDescending(x => x.TransactionDateTime).Take(1).ToList();
-            var result = _mapper.Map<CustomerServiceModel>(customer);
-            return result;
-        }
-
-        public CustomerServiceModel GetCustomerBy(int id, string email)
-        {
-            var customer = _customerRepository.GetCustomerBy(id, email);
-            if (customer == null) return null;
-            customer.Transactions = customer.Transactions.OrderByDescending(x => x.TransactionDateTime).Take(5).ToList();
-            var result = _mapper.Map<CustomerServiceModel>(customer);
-            return result;
         }
     }
 }

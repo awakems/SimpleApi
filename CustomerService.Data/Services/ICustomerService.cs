@@ -11,8 +11,5 @@ namespace CustomerService.Data.Services
     public interface ICustomerService
     {
         CustomerServiceModel GetCustomer(CustomerServiceRequestModel requestParams);
-        CustomerServiceModel GetCustomerBy(int id);
-        CustomerServiceModel GetCustomerBy(string email);
-        CustomerServiceModel GetCustomerBy(int id, string email);
     }
 }

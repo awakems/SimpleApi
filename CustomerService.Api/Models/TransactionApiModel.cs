@@ -9,7 +9,7 @@ namespace CustomerService.Api.Models
     public class TransactionApiModel
     {
         [JsonProperty("id")]
-        public decimal ID { get; set; }
+        public long ID { get; set; }
         [JsonProperty("date")]
         public string TransactionDateTime { get; set; }
         [JsonProperty("amount")]

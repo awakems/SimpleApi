@@ -8,7 +8,7 @@ namespace CustomerService.Data.Services.ServiceModels
 {
     public class TransactionServiceModel
     {
-        public decimal ID { get; set; }
+        public long ID { get; set; }
         public DateTime TransactionDateTime { get; set; }
         public decimal Amount { get; set; }
         public string CurrencyCode { get; set; }
