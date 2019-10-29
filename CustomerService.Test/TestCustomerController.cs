@@ -3,6 +3,7 @@ using System.Web.Http;
 using System.Web.Http.Results;
 using AutoMapper;
 using CustomerService.Api.Controllers;
+using CustomerService.Api.Models;
 using CustomerService.Data.Repositories;
 using CustomerService.Data.Services;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
