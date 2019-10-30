@@ -33,7 +33,6 @@ namespace CustomerService.Data.Services.Impl
             {
                 var customer = _customerRepository.GetCustomerBy((int)id, email);
                 if (customer == null) return null;
-                customer.Transactions = customer.Transactions.OrderByDescending(x => x.TransactionDateTime).Take(5).ToList();
                 var result = _mapper.Map<CustomerServiceModel>(customer);
                 return result;
             }
@@ -42,7 +41,6 @@ namespace CustomerService.Data.Services.Impl
             {
                 var customer = _customerRepository.GetCustomerBy((int)id);
                 if (customer == null) return null;
-                customer.Transactions = customer.Transactions.Take(0).ToList();
                 var result = _mapper.Map<CustomerServiceModel>(customer);
                 return result;
             }
@@ -51,7 +49,6 @@ namespace CustomerService.Data.Services.Impl
             {
                 var customer = _customerRepository.GetCustomerBy(email);
                 if (customer == null) return null;
-                customer.Transactions = customer.Transactions.OrderByDescending(x => x.TransactionDateTime).Take(1).ToList();
                 var result = _mapper.Map<CustomerServiceModel>(customer);
                 return result;
             }

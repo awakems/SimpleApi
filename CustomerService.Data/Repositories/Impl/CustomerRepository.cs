@@ -8,17 +8,44 @@ namespace CustomerService.Data.Repositories.Impl
 
         public Customer GetCustomerBy(int id)
         {
-            return _context.Customers.Find(id);
+            var result = _context.Customers.Find(id);
+            if (result == null) return null;
+            return new Customer
+            {
+                ID = result.ID,
+                ContactEmail = result.ContactEmail,
+                MobileNo = result.MobileNo,
+                Name = result.Name,
+                Transactions = result.Transactions.OrderByDescending(x => x.TransactionDateTime).Take(5).ToList()
+            };
         }
 
         public Customer GetCustomerBy(string email)
         {
-            return _context.Customers.FirstOrDefault(x => x.ContactEmail == email);
+            var result = _context.Customers.FirstOrDefault(x => x.ContactEmail == email);
+            if (result == null) return null;
+            return new Customer
+            {
+                ID = result.ID,
+                ContactEmail = result.ContactEmail,
+                MobileNo = result.MobileNo,
+                Name = result.Name,
+                Transactions = result.Transactions.OrderByDescending(x => x.TransactionDateTime).Take(5).ToList()
+            };
         }
 
         public Customer GetCustomerBy(int id, string email)
         {
-            return _context.Customers.FirstOrDefault(x => x.ID == id && x.ContactEmail == email);
+            var result = _context.Customers.FirstOrDefault(x => x.ID == id && x.ContactEmail == email);
+            if (result == null) return null;
+            return new Customer
+            {
+                ID = result.ID,
+                ContactEmail = result.ContactEmail,
+                MobileNo = result.MobileNo,
+                Name = result.Name,
+                Transactions = result.Transactions.OrderByDescending(x => x.TransactionDateTime).Take(5).ToList()
+            };
         }
 
         public void Dispose() => _context.Dispose();
