@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Data.Entity;
 
 namespace CustomerService.Data.Repositories.Impl
 {
@@ -8,44 +9,17 @@ namespace CustomerService.Data.Repositories.Impl
 
         public Customer GetCustomerBy(int id)
         {
-            var result = _context.Customers.Find(id);
-            if (result == null) return null;
-            return new Customer
-            {
-                ID = result.ID,
-                ContactEmail = result.ContactEmail,
-                MobileNo = result.MobileNo,
-                Name = result.Name,
-                Transactions = result.Transactions.OrderByDescending(x => x.TransactionDateTime).Take(5).ToList()
-            };
+            return _context.Customers.Include(x => x.Transactions.OrderByDescending(z => z.TransactionDateTime).Take(5)).FirstOrDefault(y => y.ID == id);
         }
 
         public Customer GetCustomerBy(string email)
         {
-            var result = _context.Customers.FirstOrDefault(x => x.ContactEmail == email);
-            if (result == null) return null;
-            return new Customer
-            {
-                ID = result.ID,
-                ContactEmail = result.ContactEmail,
-                MobileNo = result.MobileNo,
-                Name = result.Name,
-                Transactions = result.Transactions.OrderByDescending(x => x.TransactionDateTime).Take(5).ToList()
-            };
+            return _context.Customers.Include(x => x.Transactions.OrderByDescending(z => z.TransactionDateTime).Take(5)).FirstOrDefault(x => x.ContactEmail == email);
         }
 
         public Customer GetCustomerBy(int id, string email)
         {
-            var result = _context.Customers.FirstOrDefault(x => x.ID == id && x.ContactEmail == email);
-            if (result == null) return null;
-            return new Customer
-            {
-                ID = result.ID,
-                ContactEmail = result.ContactEmail,
-                MobileNo = result.MobileNo,
-                Name = result.Name,
-                Transactions = result.Transactions.OrderByDescending(x => x.TransactionDateTime).Take(5).ToList()
-            };
+            return _context.Customers.Include(x => x.Transactions.OrderByDescending(z => z.TransactionDateTime).Take(5)).FirstOrDefault(x => x.ID == id && x.ContactEmail == email);
         }
 
         public void Dispose() => _context.Dispose();
